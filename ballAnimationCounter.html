@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+      }
+
+      .rect {
+        display: flex;
+        height: 50px;
+        width: 50px;
+        background-color: "";
+        position: relative;
+        font-family: sans-serif;
+        font-size: 15px;
+        align-items: center;
+        justify-content: center;
+        background-color: red;
+        border-color: black;
+        border-radius: 50%;
+        border-style: solid;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="rect0" class="rect"></div>
+    <script>
+      window.onload = () => {
+        startSetTimeoutAnimation();
+      };
+
+      function startSetTimeoutAnimation() {
+        var count = 1;
+        var button = document.getElementById("rect0"),
+          buttoncounter = 0;
+
+        const refreshRate = 1000 / 60;
+        const windowWidth = window.innerWidth;
+        const ballwidth = document.getElementById("rect0").offsetWidth;
+        var totwidth = windowWidth - ballwidth;
+        let rect = document.getElementById("rect0");
+        let speed = 2;
+        let position = 0;
+        
+        button.onclick = function () {
+          count += 1;
+
+          if (count % 2 == 0) {
+            buttoncounter += 1;
+            button.innerHTML = buttoncounter;
+            elem = window.setInterval(() => {
+              position = position + speed;
+              if (position > totwidth || position < 0) {
+                speed = speed * -1;
+                position = position + speed;
+              }
+              rect.style.left = position + "px";
+            }, refreshRate);
+          } else {
+            clearInterval(elem);
+          }
+        };
+        
+      }
+    </script>
+  </body>
+</html>
